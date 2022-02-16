@@ -2,7 +2,7 @@ export default {
     name: 'pin',
     title: 'Pin',
     type: 'document',
-    field: [
+    fields: [
         {
         name: 'title',
         title: 'Title',
@@ -39,7 +39,7 @@ export default {
                     {
                     name: 'postedBy',
                     title: 'PostedBy',
-                    type: 'postedby',
+                    type: 'postedBy',
                     },
                     {
                     name: 'save',
