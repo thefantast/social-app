@@ -2,7 +2,7 @@ import React from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom';
 //components
 import Login from './components/Login';
-import Home from './components/Home';
+import Home from './container/Home';
 
 const App = () => {
   return (
