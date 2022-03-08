@@ -13,7 +13,7 @@ const Navbar = ({searchTerm, setSearchTerm, user  }) => {
             <IoMdSearch fontSize={21} className="ml-1" />
             <input
                 type="text"
-                onchange={(e) => setSearchTerm(e.target.value)}
+                onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="search term"
                 value={searchTerm}
                 onFocus={() => navigate('/search')}
