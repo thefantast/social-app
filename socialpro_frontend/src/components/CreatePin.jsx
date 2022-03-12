@@ -21,11 +21,21 @@ const CreatePin = ({user}) => {
   const navigate = useNavigate();
 
   const uploadImage = (e) => {
-      const {type} = e.target.files[0];
+      const {type, name} = e.target.files[0];
 
-      if(type === 'image/png' || type == 'image/svg' || type === 'image/jpeg' || type === 'image/gif' || type === 'image/tiff') {
+      if(type === 'image/png' || type === 'image/svg' || type === 'image/jpeg' || type === 'image/gif' || type === 'image/tiff') {
         setWrongImageType(false);
-        setLoading()
+        setLoading(true);
+
+        client.assets
+        .upload('image', e.target.files[0], {contentType: type, filename: name})
+        .then((document) => {
+          setImageAsset(document);
+          setLoading(false)
+        })
+        .catch((error) => {
+          console.log('image upload error', error);
+        })
       } else {
         setWrongImageType(true);
       }
@@ -63,11 +73,61 @@ const CreatePin = ({user}) => {
                   />
                 </label>
               ): ( 
-                <p>Something else</p>
+                <div className="relative h-full">
+                  <img src={imageAsset.url} alt="uploaded-pic" className="h-full w-full" />
+                    <button
+                      type="button"
+                      className="absolute bottom-3 right-3 p-3 rounded-full bg-white text-xl cursor-pointer outline-none hover:shadow-md transition-all duration-500 ease-in-out"
+                      onClick={() => setImageAsset(null)}
+                    >
+                      <MdDelete />
+                    </button>
+                </div>
               )}
           </div>
-        </div>
+          </div>
+        
+          
+        <div className="flex flex-1 flex-col gap-6 lg:pl-5 mt-5 w-full">
+          <input
+           type="text"
+           value={title}
+           onChange={(e) => setTitle(e.target.value)}
+           placeholder="Add your title here"
+           className="outline-none text-2xl sm:text-3xl font-bold border-b-2 borde-gray-200 p-2"     
+          />
+         {user && (
+           <div className="flex gap-2 my-2 items-center bg-white rounded-lg">
+           <img
+            src={user.imageAsset?.null}
+            className="w-10 h-10 rounded-full"
+            alt="user-profile"
+            />
+            <p className="font-bold">{user.userName}</p>
+           
+           </div>
+         )}
+         <input
+         type="text"
+         value={about}
+         onChange={(e) => setAbout(e.target.value)}
+         placeholder="What is your pin about"
+         className="outline-none text-base sm:text-lg border-b-2 borde-gray-200 p-2"     
+        />
 
+        <input
+        type="text"
+        value={destination}
+        onChange={(e) => setDestination(e.target.value)}
+        placeholder="Add a destination link"
+        className="outline-none text-base sm:text-lg border-b-2 borde-gray-200 p-2"     
+       />
+        <div className="flex flex-col">
+          <div>
+            <p className="mb-2 font-semibold tex-lg sm:text-xl">Choose Pin Categories</p>
+          </div>
+        </div>
+        </div>
       </div>
     </div>
   )
