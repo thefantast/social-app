@@ -18,6 +18,8 @@ const Pins = ({user }) => {
              <Route path="/" element={<Feed />} />
              <Route path="/category/:categoryId" element={<Feed />} />
              {/*We provide in the element the user. The user comming through the props above */}
+             {/* in the Path you will notice a dynamic parameter like this :pinId, with that you can
+            take the user value data to the page*/}
              <Route path="/pin-detail/:pinId" element={<PinDetail user={user} />} />
              {/*With the props user in create pin we know who created the pin*/}
              <Route path="/create-pin" element={<CreatePin user={user}/>} />

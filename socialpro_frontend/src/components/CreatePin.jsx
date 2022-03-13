@@ -53,7 +53,7 @@ const CreatePin = ({user}) => {
             asset: {
               _type: 'reference',
               _ref: imageAsset?._id       
-            }
+            },
           },
           userId: user._id,
           postedBy: {
@@ -62,16 +62,16 @@ const CreatePin = ({user}) => {
           },
           category,
         }
-        client.creat(doc)
+        client.create(doc)
         .then(() => {
-          navigate('/')
-        })
+          navigate('/');
+        });
     } else {
       setFields(true);
 
-      setTimeout(() => setFields(false), 2000)
+      setTimeout(() => setFields(false), 2000);
     }
-  }  
+  };  
 
 
   return (
@@ -101,7 +101,7 @@ const CreatePin = ({user}) => {
                     type="file"
                     name="upload"
                     onChange={uploadImage}
-                    classNmae="w-0 h-0"
+                    className="w-0 h-0"
                   />
                 </label>
               ): ( 
@@ -131,7 +131,7 @@ const CreatePin = ({user}) => {
          {user && (
            <div className="flex gap-2 my-2 items-center bg-white rounded-lg">
            <img
-            src={user.imageAsset?.null}
+            src={user.image}
             className="w-10 h-10 rounded-full"
             alt="user-profile"
             />
@@ -171,13 +171,13 @@ const CreatePin = ({user}) => {
                 
             </select>
             <div className="flex justify-end items-end mt-5">
-                  <buttton
+                  <button
                   type="button"
                   onClick={savePin}
                   className="bg-red-500 text-white font-bold p-2 rounded-full w-28 outline-none"
                   >
                   Save Pin
-                  </buttton>
+                  </button>
             </div>
           </div>
         </div>
